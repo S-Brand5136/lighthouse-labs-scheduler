@@ -9,7 +9,7 @@ const InterviewerList = (props) => {
     return (
       <InterviewListItem
         key={item.id}
-        setInterviewer={props.setInterviewer}
+        setInterviewer={() => props.setInterviewer(item.id)}
         selected={props.interviewer === item.id}
         name={item.name}
         avatar={item.avatar}

@@ -9,13 +9,13 @@ const InterviewListItem = (props) => {
   });
 
   return (
-    <li className={liClass} onClick={() => props.setInterviewer(props.id)}>
+    <li className={liClass} onClick={props.setInterviewer}>
       <img
         className='interviewers__item-image'
         src={props.avatar}
-        alt='Sylvia Palmer'
+        alt={props.name}
       />
-      {props.selected ? props.name : ''}
+      {props.selected && props.name}
     </li>
   );
 };
