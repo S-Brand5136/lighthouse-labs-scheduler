@@ -6,6 +6,7 @@ const DayList = (props) => {
 
 // Create an array of DayListItems to render for each day passed in
   const dayListItem = props.days.map((day) => {
+
     return <DayListItem 
     key={day.id}
     name={day.name} 
