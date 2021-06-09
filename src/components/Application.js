@@ -65,7 +65,7 @@ export default function Application() {
   const [day, setDay] = useState('Monday');
   const [days, setDays] = useState([]);
 
-  // Get all of the days from api, only once on initial component mount
+  // Get all of the days from api, only once on initial load
   useEffect(() => {
     axios
       .get('api/days')
