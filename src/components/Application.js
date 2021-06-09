@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import DayList from './DayList';
+import Appointment from 'components/Appointment';
 
 import 'components/Application.scss';
 
@@ -58,11 +59,31 @@ const appointments = [
   {
     id: 5,
     time: '4pm',
+    interview: {
+      student: 'John Doe',
+      interviewer: {
+        id: 1,
+        name: 'Sven Jones',
+        avatar: 'https://i.imgur.com/twYrpay.jpg',
+      },
+    },
+  },
+  {
+    id: 6,
+    time: '5pm',
+  },
+  {
+    id: 7,
+    time: '6pm',
   },
 ];
 
 export default function Application(props) {
   const [day, setDay] = useState('Monday');
+
+  const appointmentsList = appointments.map((appointment) => {
+    return <Appointment key={appointment.id} {...appointment} />;
+  });
 
   return (
     <main className='layout'>
@@ -82,9 +103,7 @@ export default function Application(props) {
           alt='Lighthouse Labs'
         />{' '}
       </section>
-      <section className='schedule'>
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
-      </section>
+      <section className='schedule'>{appointmentsList}</section>
     </main>
   );
 }
