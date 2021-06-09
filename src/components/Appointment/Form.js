@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Button from '../Button';
 import InterviewerList from '../InterviewerList';
 
-const Form = () => {
+const Form = (props) => {
+  const [interviewer, setInterviewer] = useState(props.interviewer);
+  const [name, setName] = useState(props.name || '');
+
   return (
     <main className='appointment__card appointment__card--create'>
       <section className='appointment__card-left'>
@@ -12,10 +15,9 @@ const Form = () => {
             className='appointment__create-input text--semi-bold'
             name='name'
             type='text'
-            placeholder='Enter Student Name'
-            /*
-          This must be a controlled component
-        */
+            placeholder={'Enter Student Name'}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </form>
         <InterviewerList
@@ -26,8 +28,12 @@ const Form = () => {
       </section>
       <section className='appointment__card-right'>
         <section className='appointment__actions'>
-          <Button danger>Cancel</Button>
-          <Button confirm>Save</Button>
+          <Button onClick={props.onCancel} danger>
+            Cancel
+          </Button>
+          <Button onClick={props.onSave} confirm>
+            Save
+          </Button>
         </section>
       </section>
     </main>
