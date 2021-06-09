@@ -1,13 +1,18 @@
 import React from 'react';
 
-import Header from '/Appointments/Header';
-import Show from '/Appointments/Shpw';
-import Empty from '/Appointments/Empty';
+import Header from './Header';
+import Show from './Show';
+import Empty from './Empty';
 
 import './styles.scss';
 
-const Appointment = () => {
-  return <article className='appointment'></article>;
+const Appointment = (props) => {
+  return (
+    <article className='appointment'>
+      <Header time={props.time} />
+      {props.interview ? <Show /> : <Empty />}
+    </article>
+  );
 };
 
 export default Appointment;
