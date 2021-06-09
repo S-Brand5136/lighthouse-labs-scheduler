@@ -4,7 +4,7 @@ import Button from '../Button';
 import InterviewerList from '../InterviewerList';
 
 const Form = (props) => {
-  const [interviewer, setInterviewer] = useState(props.interviewer);
+  const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [name, setName] = useState(props.name || '');
 
   return (
