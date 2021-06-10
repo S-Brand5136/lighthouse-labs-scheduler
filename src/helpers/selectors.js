@@ -11,6 +11,18 @@ const getAppointmentsForDay = (state, day) => {
     .map((item) => appointments[item]);
 };
 
-const getInterview = (state, interview) => {};
+const getInterview = (state, interview) => {
+  // Destructure values, if student is falsey set to empty object
+  // and return null, else return object
+  const { interviewers } = state;
+  const { student, interviewer } = interview || {};
+
+  return !student
+    ? null
+    : {
+        student,
+        interviewer: interviewers[interviewer],
+      };
+};
 
 export { getAppointmentsForDay, getInterview };
