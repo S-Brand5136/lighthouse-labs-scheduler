@@ -1,4 +1,4 @@
-export function getAppointmentsForDay(state, day) {
+const getAppointmentsForDay = (state, day) => {
   const { days, appointments } = state;
   // Filter out day that we need, map the appointments to a new array, flatten it,
   // map all the appointments with matching ids
@@ -9,4 +9,8 @@ export function getAppointmentsForDay(state, day) {
     .map((item) => item.appointments)
     .flat()
     .map((item) => appointments[item]);
-}
+};
+
+const getInterview = (state, interview) => {};
+
+export { getAppointmentsForDay, getInterview };
