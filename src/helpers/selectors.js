@@ -38,6 +38,7 @@ const getInterviewersForDay = ({ days, interviewers }, day) => {
   for (const item of days) {
     if (item.name === day) {
       interviewersId = item.interviewers;
+      break;
     }
   }
 
