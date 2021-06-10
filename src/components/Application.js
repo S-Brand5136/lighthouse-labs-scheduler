@@ -12,6 +12,7 @@ export default function Application() {
     day: 'Monday',
     days: [],
     appointments: {},
+    interviewers: {},
   });
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
@@ -28,6 +29,7 @@ export default function Application() {
         ...prev,
         days: all[0].data,
         appointments: all[1].data,
+        interviewers: all[2].data,
       }));
     });
   }, []);
