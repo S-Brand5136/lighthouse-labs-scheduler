@@ -41,6 +41,10 @@ export default function Application() {
     });
   }, []);
 
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+  }
+
   // Render Appointment component for each appointment of the day
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
@@ -51,6 +55,7 @@ export default function Application() {
         {...appointment}
         interview={interview}
         interviewers={interviewers}
+        bookInterview={bookInterview}
       />
     );
   });
