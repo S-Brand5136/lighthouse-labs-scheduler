@@ -61,16 +61,16 @@ export default function Application() {
   const cancelInterview = (id) => {
     const appointment = {
       ...state.appointments[id],
-      interview: null
-    }
+      interview: null,
+    };
     const appointments = {
       ...state.appointments,
-      [id]: appointment
-    }
-    
-     return axios.delete(`/api/appointments/${id}`).then(() => {
-       return setState({...state, appointments})
-     })
+      [id]: appointment,
+    };
+
+    return axios.delete(`/api/appointments/${id}`).then(() => {
+      return setState({ ...state, appointments });
+    });
   };
 
   // Render Appointment component for each appointment of the day

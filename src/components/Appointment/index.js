@@ -35,25 +35,21 @@ const Appointment = (props) => {
       interviewer,
     };
 
-    transition(SAVING);
-    props.bookInterview(props.id, interview).then(() => {
-      transition(SHOW);
-    })
-    .catch(() => {
-      transition(ERROR_SAVE)
-    })
+    transition(SAVING, true);
+    props
+      .bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch(() => transition(ERROR_SAVE, true));
   };
 
   // Sends an ID for an appointment to be deleted,
   // transitions to deleting while waiting for response
   const onDelete = () => {
-    transition(DELETING);
-    props.cancelInterview(props.id).then(() => {
-      transition(EMPTY);
-    })
-    .catch(() => {
-      transition(ERROR_DELETE)
-    })
+    transition(DELETING, true);
+    props
+      .cancelInterview(props.id)
+      .then(() => transition(EMPTY))
+      .catch(() => transition(ERROR_DELETE, true));
   };
 
   return (
@@ -73,10 +69,28 @@ const Appointment = (props) => {
       {mode === CREATE && (
         <Form interviewers={props.interviewers} onSave={save} onCancel={back} />
       )}
-      {mode === CONFIRM && <Confirm message='Are you sure you would like to delete?' onConfirm={onDelete} onCancel={back}/>}
-      {mode === EDIT && <Form name={props.interview.student} interviewer={props.interview.interviewer.id} interviewers={props.interviewers} onSave={save} onCancel={back} />}
-      {mode === ERROR_SAVE && <Error message='Could not save the appointment' onClose={back}/>}
-      {mode === ERROR_DELETE && <Error message='Could not cancel the appointment' onClose={back}/>}
+      {mode === CONFIRM && (
+        <Confirm
+          message='Are you sure you would like to delete?'
+          onConfirm={onDelete}
+          onCancel={back}
+        />
+      )}
+      {mode === EDIT && (
+        <Form
+          name={props.interview.student}
+          interviewer={props.interview.interviewer.id}
+          interviewers={props.interviewers}
+          onSave={save}
+          onCancel={back}
+        />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error message='Could not save the appointment' onClose={back} />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error message='Could not cancel the appointment' onClose={back} />
+      )}
     </article>
   );
 };
