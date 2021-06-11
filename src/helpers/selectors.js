@@ -1,6 +1,5 @@
-const getAppointmentsForDay = (state, day) => {
-  const { days, appointments } = state;
-  // Filter out day that we need, map the appointments to a new array, flatten it,
+const getAppointmentsForDay = ({ days, appointments }, day) => {
+  // Search for appointments that we need
   // map all the appointments with matching ids
   // or return an empty array if no day is found
   let appointmentIds = [];
@@ -16,22 +15,23 @@ const getAppointmentsForDay = (state, day) => {
 };
 
 const getInterview = (state, interview) => {
-  // Destructure values, if student is falsey set to empty object
-  // and return null, else return object
+  // Check if interview is falsey, return null if so.
+  // Destructure values return new interview object
+  if (!interview) {
+    return null;
+  }
   const { interviewers } = state;
-  const { student, interviewer } = interview || {};
+  const { student, interviewer } = interview;
 
-  return !student
-    ? null
-    : {
-        student,
-        interviewer: interviewers[interviewer],
-      };
+  return {
+    student,
+    interviewer: interviewers[interviewer],
+  };
 };
 
 const getInterviewersForDay = ({ days, interviewers }, day) => {
-  // Filter out day that we need, map the appointments to a new array, flatten it,
-  // map all the appointments with matching ids
+  // Search for interviewers that we need
+  // map all the interviewers with matching ids
   // or return an empty array if no day is found
   let interviewersId = [];
 
