@@ -43,6 +43,17 @@ export default function Application() {
 
   function bookInterview(id, interview) {
     console.log(id, interview);
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
+    return setState({ ...state, appointments });
   }
 
   // Render Appointment component for each appointment of the day
