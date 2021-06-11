@@ -14,6 +14,7 @@ const EMPTY = 'EMPTY';
 const SHOW = 'SHOW';
 const CREATE = 'CREATE';
 const SAVING = 'SAVING';
+const DELETING = 'DELETING';
 
 const Appointment = (props) => {
   const { mode, transition, back } = useVisualMode(
@@ -21,7 +22,7 @@ const Appointment = (props) => {
   );
 
   // Sends a new interview to be saved up to the parent,
-  //transitions to saving while it waits
+  //transitions to saving while waiting for response
   const save = (name, interviewer) => {
     const interview = {
       student: name,
@@ -34,6 +35,15 @@ const Appointment = (props) => {
     });
   };
 
+  // Sends an ID for an appointment to be deleted,
+  // transitions to deleting while waiting for response
+  const onDelete = () => {
+    transition(DELETING);
+    props.cancelInterview(props.id).then(() => {
+      transition(EMPTY);
+    });
+  };
+
   return (
     <article className='appointment'>
       <Header time={props.time} />
@@ -42,9 +52,11 @@ const Appointment = (props) => {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
+          onDelete={onDelete}
         />
       )}
       {mode === SAVING && <Status message={SAVING} />}
+      {mode === DELETING && <Status message={DELETING} />}
       {mode === CREATE && (
         <Form interviewers={props.interviewers} onSave={save} onCancel={back} />
       )}
