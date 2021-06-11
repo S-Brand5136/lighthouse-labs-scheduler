@@ -18,13 +18,16 @@ const Appointment = (props) => {
     props.interview ? SHOW : EMPTY
   );
 
-  function save(name, interviewer) {
+  // Sends a new interview to be saved up to the parent
+  const save = (name, interviewer) => {
     const interview = {
       student: name,
       interviewer,
     };
-    props.bookInterview(interview.student, interview.interviewer);
-  }
+
+    props.bookInterview(props.id, interview);
+    transition(SHOW);
+  };
 
   return (
     <article className='appointment'>

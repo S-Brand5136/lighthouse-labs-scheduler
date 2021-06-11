@@ -41,9 +41,8 @@ export default function Application() {
     });
   }, []);
 
-  function bookInterview(id, interview) {
-    console.log(id, interview);
-
+  // Creates, and updates appointments in state object
+  const bookInterview = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -54,7 +53,7 @@ export default function Application() {
     };
 
     return setState({ ...state, appointments });
-  }
+  };
 
   // Render Appointment component for each appointment of the day
   const schedule = appointments.map((appointment) => {
