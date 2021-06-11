@@ -57,9 +57,20 @@ export default function Application() {
     });
   };
 
+  // Sets interview to null, and updates appointments in state Object
   const cancelInterview = (id) => {
-    console.log(id);
-    console.log(state.interviews);
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    }
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    }
+    
+     return axios.delete(`/api/appointments/${id}`).then(() => {
+       return setState({...state, appointments})
+     })
   };
 
   // Render Appointment component for each appointment of the day
@@ -73,7 +84,7 @@ export default function Application() {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
-        cancelInterciews={cancelInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });
