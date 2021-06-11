@@ -39,6 +39,9 @@ const Appointment = (props) => {
     props.bookInterview(props.id, interview).then(() => {
       transition(SHOW);
     })
+    .catch(() => {
+      transition(ERROR_SAVE)
+    })
   };
 
   // Sends an ID for an appointment to be deleted,
@@ -47,6 +50,9 @@ const Appointment = (props) => {
     transition(DELETING);
     props.cancelInterview(props.id).then(() => {
       transition(EMPTY);
+    })
+    .catch(() => {
+      transition(ERROR_DELETE)
     })
   };
 
@@ -69,6 +75,8 @@ const Appointment = (props) => {
       )}
       {mode === CONFIRM && <Confirm message='Are you sure you would like to delete?' onConfirm={onDelete} onCancel={back}/>}
       {mode === EDIT && <Form name={props.interview.student} interviewer={props.interview.interviewer.id} interviewers={props.interviewers} onSave={save} onCancel={back} />}
+      {mode === ERROR_SAVE && <Error message='Could not save the appointment' onClose={back}/>}
+      {mode === ERROR_DELETE && <Error message='Could not cancel the appointment' onClose={back}/>}
     </article>
   );
 };
