@@ -6,12 +6,14 @@ import Header from './Header';
 import Show from './Show';
 import Empty from './Empty';
 import Form from './Form';
+import Status from './Status';
 
 import './styles.scss';
 
 const EMPTY = 'EMPTY';
 const SHOW = 'SHOW';
 const CREATE = 'CREATE';
+const SAVING = 'SAVING';
 
 const Appointment = (props) => {
   const { mode, transition, back } = useVisualMode(
@@ -25,8 +27,10 @@ const Appointment = (props) => {
       interviewer,
     };
 
-    props.bookInterview(props.id, interview);
-    transition(SHOW);
+    transition(SAVING);
+    props.bookInterview(props.id, interview).then(() => {
+      transition(SHOW);
+    });
   };
 
   return (
@@ -39,6 +43,7 @@ const Appointment = (props) => {
           interviewer={props.interview.interviewer}
         />
       )}
+      {mode === SAVING && <Status message={SAVING} />}
       {mode === CREATE && (
         <Form interviewers={props.interviewers} onSave={save} onCancel={back} />
       )}

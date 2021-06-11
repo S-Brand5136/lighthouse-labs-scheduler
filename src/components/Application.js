@@ -52,7 +52,9 @@ export default function Application() {
       [id]: appointment,
     };
 
-    return setState({ ...state, appointments });
+    return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
+      return setState({ ...state, appointments });
+    });
   };
 
   // Render Appointment component for each appointment of the day
