@@ -18,6 +18,8 @@ export default function Application() {
     appointments: {},
     interviewers: {},
   });
+
+  // Get the appointments and interviews for the given day
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
 
@@ -39,6 +41,7 @@ export default function Application() {
     });
   }, []);
 
+  // Render Appointment component for each appointment of the day
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
 
