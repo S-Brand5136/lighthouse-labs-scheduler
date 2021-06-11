@@ -8,7 +8,6 @@ import Empty from './Empty';
 import Form from './Form';
 import Status from './Status';
 import Confirm from './Confirm';
-import Edit from './Edit';
 
 import './styles.scss';
 
@@ -57,6 +56,7 @@ const Appointment = (props) => {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           onDelete={() => transition(CONFIRM)}
+          onEdit={() => transition(EDIT)}
         />
       )}
       {mode === SAVING && <Status message={SAVING} />}
@@ -65,6 +65,7 @@ const Appointment = (props) => {
         <Form interviewers={props.interviewers} onSave={save} onCancel={back} />
       )}
       {mode === CONFIRM && <Confirm message='Are you sure you would like to delete?' onConfirm={onDelete} onCancel={back}/>}
+      {mode === EDIT && <Form name={props.interview.student} interviewer={props.interview.interviewer.id} interviewers={props.interviewers} onSave={save} onCancel={back} />}
     </article>
   );
 };
