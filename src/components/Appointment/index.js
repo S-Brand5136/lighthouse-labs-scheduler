@@ -20,7 +20,8 @@ const Appointment = (props) => {
     props.interview ? SHOW : EMPTY
   );
 
-  // Sends a new interview to be saved up to the parent
+  // Sends a new interview to be saved up to the parent,
+  //transitions to saving while it waits
   const save = (name, interviewer) => {
     const interview = {
       student: name,

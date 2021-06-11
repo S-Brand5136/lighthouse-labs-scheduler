@@ -57,6 +57,11 @@ export default function Application() {
     });
   };
 
+  const cancelInterview = (id) => {
+    console.log(id);
+    console.log(state.interviews);
+  };
+
   // Render Appointment component for each appointment of the day
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
@@ -68,6 +73,7 @@ export default function Application() {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
+        cancelInterciews={cancelInterview}
       />
     );
   });
