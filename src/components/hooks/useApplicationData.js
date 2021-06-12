@@ -28,6 +28,20 @@ const useApplicationData = () => {
     });
   }, []);
 
+  const spotsRemaining = (dayName, days, appointments) => {
+    const daysCopy = days.map((day) => ({ ...day }));
+
+    for (const day of daysCopy) {
+      if (day.name === dayName) {
+        day.spots = day.appointments.filter(
+          (item) => !appointments[item].interview
+        ).length;
+      }
+    }
+
+    return daysCopy;
+  };
+
   // Creates, and updates appointments in state object
   const bookInterview = (id, interview) => {
     const appointment = {
@@ -40,7 +54,11 @@ const useApplicationData = () => {
     };
 
     return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
-      return setState({ ...state, appointments });
+      return setState({
+        ...state,
+        appointments,
+        days: spotsRemaining(state.day, state.days, appointments),
+      });
     });
   };
 
@@ -56,7 +74,11 @@ const useApplicationData = () => {
     };
 
     return axios.delete(`/api/appointments/${id}`).then(() => {
-      return setState({ ...state, appointments });
+      return setState({
+        ...state,
+        appointments,
+        days: spotsRemaining(state.day, state.days, appointments),
+      });
     });
   };
 
