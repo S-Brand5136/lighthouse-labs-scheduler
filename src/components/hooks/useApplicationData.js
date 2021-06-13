@@ -28,6 +28,8 @@ const useApplicationData = () => {
     });
   }, []);
 
+  // Pair programmed with Brandon Copeland
+  // Calculates the remaining appointment spots in the chosen day
   const spotsRemaining = (dayName, days, appointments) => {
     const daysCopy = days.map((day) => ({ ...day }));
 
