@@ -42,7 +42,7 @@ const useApplicationData = () => {
   });
 
   // Sets the day to the day selected on the sideBar
-  const setDay = (day) => dispatch({ type: SET_DAY, value: { ...state, day } });
+  const setDay = (day) => dispatch({ type: SET_DAY, value: { day } });
 
   // Get all of the days from api, only once on initial load
   useEffect(() => {
@@ -54,7 +54,6 @@ const useApplicationData = () => {
       dispatch({
         type: SET_APPLICATION_DATA,
         value: {
-          ...state,
           days: all[0].data,
           appointments: all[1].data,
           interviewers: all[2].data,
@@ -95,7 +94,6 @@ const useApplicationData = () => {
       return dispatch({
         type: SET_INTERVIEW,
         value: {
-          ...state,
           appointments,
           days: spotsRemaining(state.day, state.days, appointments),
         },
@@ -118,7 +116,6 @@ const useApplicationData = () => {
       return dispatch({
         type: SET_INTERVIEW,
         value: {
-          ...state,
           appointments,
           days: spotsRemaining(state.day, state.days, appointments),
         },
