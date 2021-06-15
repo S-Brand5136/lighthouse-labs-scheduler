@@ -13,6 +13,8 @@ import {
   prettyDOM,
 } from '@testing-library/react';
 
+import axios from 'axios';
+
 import Application from 'components/Application';
 
 afterEach(cleanup);
@@ -86,7 +88,7 @@ describe('Application', () => {
     // Check that the deleting status is shown
     expect(getByText(appointment, 'DELETING')).toBeInTheDocument();
 
-    // Check taht the interview was canceled
+    // Check that the interview was canceled
     await waitForElement(() => getByAltText(appointment, 'Add'));
 
     const day = getAllByTestId(container, 'day').find((day) =>
@@ -106,5 +108,29 @@ describe('Application', () => {
     const appointment = getAllByTestId(container, 'appointment').find(
       (appointment) => queryByText(appointment, 'Archie Cohen')
     );
+
+    // simulate editting an interview
+
+    fireEvent.click(getByAltText(appointment, 'Edit'));
+
+    fireEvent.change(getByPlaceholderText(appointment, 'Enter Student Name'), {
+      target: { value: 'Lydia Miller-Jones' },
+    });
+
+    fireEvent.click(getByAltText(appointment, 'Sylvia Palmer'));
+
+    fireEvent.click(getByText(appointment, 'Save'));
+
+    // Check that the saving status is shown
+    expect(getByText(appointment, 'SAVING')).toBeInTheDocument();
+
+    // Check that the spots remaining is unchanged
+    await waitForElement(() => queryByText(appointment, 'Lydia Miller-Jones'));
+
+    const day = getAllByTestId(container, 'day').find((day) =>
+      queryByText(day, 'Monday')
+    );
+
+    expect(getByText(day, '1 spot remaining')).toBeInTheDocument();
   });
 });
