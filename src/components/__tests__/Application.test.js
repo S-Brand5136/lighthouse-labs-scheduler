@@ -10,6 +10,7 @@ import {
   getAllByTestId,
   getByAltText,
   getByPlaceholderText,
+  queryByText,
 } from '@testing-library/react';
 
 import Application from 'components/Application';
@@ -48,6 +49,8 @@ describe('Application', () => {
 
     fireEvent.click(getByText(appointment, 'Save'));
 
-    debug(prettyDOM(appointment));
+    expect(getByText(appointment, 'SAVING')).toBeInTheDocument();
+
+    await waitForElement(() => queryByText(appointment, 'Lydia Miller-Jones'));
   });
 });
