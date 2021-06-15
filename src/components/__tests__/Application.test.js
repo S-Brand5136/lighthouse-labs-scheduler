@@ -5,7 +5,6 @@ import {
   cleanup,
   waitForElement,
   fireEvent,
-  prettyDOM,
   getByText,
   getAllByTestId,
   getByAltText,
@@ -32,7 +31,7 @@ describe('Application', () => {
 
   it('loads data, books an interview and reduces the spots remaining for the first day by 1', async () => {
     // Render components and wait for data to be fetched
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
 
     await waitForElement(() => getByText(container, 'Archie Cohen'));
 
@@ -58,6 +57,6 @@ describe('Application', () => {
       queryByText(day, 'Monday')
     );
 
-    expect(getByText(day, 'no spots remaining'));
+    expect(getByText(day, 'no spots remaining')).toBeInTheDocument();
   });
 });
