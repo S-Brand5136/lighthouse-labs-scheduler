@@ -91,4 +91,14 @@ export default {
       });
     }
   }),
+  delete: jest.fn((url) => {
+    console.log(url);
+    if (url === '/api/appointments/2') {
+      /* Resloves deleting an Appointment */
+      return Promise.resolve({
+        status: 200,
+        statusText: 'Content Deleted',
+      });
+    }
+  }),
 };
