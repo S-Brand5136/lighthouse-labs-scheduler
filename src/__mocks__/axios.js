@@ -82,4 +82,13 @@ export default {
       });
     }
   }),
+  put: jest.fn((url) => {
+    if (url === `/api/appointments/1`) {
+      /* Reslove Adding an Appointment */
+      return Promise.resolve({
+        status: 204,
+        statusText: 'No Content',
+      });
+    }
+  }),
 };
