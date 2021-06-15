@@ -11,14 +11,16 @@ import Application from 'components/Application';
 
 afterEach(cleanup);
 
-it('defaults to Monday and changes the schedule when a new day is slected', async () => {
-  const { getByText } = render(<Application />);
+describe('Application', () => {
+  it('defaults to Monday and changes the schedule when a new day is slected', async () => {
+    const { getByText } = render(<Application />);
 
-  await waitForElement(() => getByText('Monday'));
+    await waitForElement(() => getByText('Monday'));
 
-  const day = getByText('Tuesday');
+    const day = getByText('Tuesday');
 
-  fireEvent.click(day);
+    fireEvent.click(day);
 
-  expect(getByText('Leopold Silvers')).toBeInTheDocument();
+    expect(getByText('Leopold Silvers')).toBeInTheDocument();
+  });
 });
