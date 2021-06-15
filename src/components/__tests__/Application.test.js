@@ -38,7 +38,7 @@ describe('Application', () => {
 
     const appointment = getAllByTestId(container, 'appointment')[0];
 
-    // Simulate user input
+    // Simulate booking a new interview
     fireEvent.click(getByAltText(appointment, 'Add'));
 
     fireEvent.change(getByPlaceholderText(appointment, 'Enter Student Name'), {
@@ -51,6 +51,13 @@ describe('Application', () => {
 
     expect(getByText(appointment, 'SAVING')).toBeInTheDocument();
 
+    // Check that the interview was added to the DOM
     await waitForElement(() => queryByText(appointment, 'Lydia Miller-Jones'));
+
+    const day = getAllByTestId(container, 'day').find((day) =>
+      queryByText(day, 'Monday')
+    );
+
+    expect(getByText(day, 'no spots remaining'));
   });
 });
