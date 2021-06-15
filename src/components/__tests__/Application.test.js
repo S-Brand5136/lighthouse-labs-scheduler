@@ -23,4 +23,8 @@ describe('Application', () => {
 
     expect(getByText('Leopold Silvers')).toBeInTheDocument();
   });
+
+  it('loads data, books an interview and reduces the spots remaining for the first day by 1', async () => {
+    const {} = render(<Application />);
+  });
 });
