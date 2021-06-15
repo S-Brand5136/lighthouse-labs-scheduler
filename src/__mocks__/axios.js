@@ -83,22 +83,17 @@ export default {
     }
   }),
   put: jest.fn((url) => {
-    if (url === `/api/appointments/1`) {
-      /* Reslove Adding an Appointment */
-      return Promise.resolve({
-        status: 204,
-        statusText: 'No Content',
-      });
-    }
+    /* Reslove Adding an Appointment */
+    return Promise.resolve({
+      status: 204,
+      statusText: 'No Content',
+    });
   }),
   delete: jest.fn((url) => {
-    console.log(url);
-    if (url === '/api/appointments/2') {
-      /* Resloves deleting an Appointment */
-      return Promise.resolve({
-        status: 200,
-        statusText: 'Content Deleted',
-      });
-    }
+    /* Resloves deleting an Appointment */
+    return Promise.resolve({
+      status: 200,
+      statusText: 'Content Deleted',
+    });
   }),
 };
