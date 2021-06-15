@@ -95,4 +95,16 @@ describe('Application', () => {
 
     expect(getByText(day, '2 spots remaining'));
   });
+
+  it('loads data, edits an interview and keeps the spots remaining for Monday the same', async () => {
+    // Render components and wait for data to be fetched and added
+
+    const { container } = render(<Application />);
+
+    await waitForElement(() => getByText(container, 'Archie Cohen'));
+
+    const appointment = getAllByTestId(container, 'appointment').find(
+      (appointment) => queryByText(appointment, 'Archie Cohen')
+    );
+  });
 });
