@@ -22,10 +22,11 @@ const Form = (props) => {
       <section className='appointment__card-left'>
         <form autoComplete='off' onSubmit={(event) => event.preventDefault()}>
           <input
+            data-testid='student-name-input'
             className='appointment__create-input text--semi-bold'
             name='name'
             type='text'
-            placeholder={'Enter Student Name'}
+            placeholder='Enter Student Name'
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -41,7 +42,11 @@ const Form = (props) => {
           <Button onClick={cancel} danger>
             Cancel
           </Button>
-          <Button onClick={() => props.onSave(name, interviewer)} confirm>
+          <Button
+            disabled={!name}
+            onClick={() => props.onSave(name, interviewer)}
+            confirm
+          >
             Save
           </Button>
         </section>
