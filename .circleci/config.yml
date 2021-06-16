@@ -1,4 +1,4 @@
-version: 2.1
+version: 2
 jobs:
   build:
     docker:
@@ -18,7 +18,6 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm test
-
 deploy:
   machine:
     enabled: true
@@ -34,9 +33,8 @@ deploy:
         name: Push Master to Production
         command: |
           git push git@github.com:S-Brand5136/lighthouse-labs-scheduler.git master:production
-
 workflows:
-  version: 2.1
+  version: 2
   test_and_deploy:
     jobs:
       - build:
