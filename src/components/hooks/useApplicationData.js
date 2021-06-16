@@ -70,6 +70,10 @@ const useApplicationData = () => {
           appointments,
           days: spotsRemaining(state.day, state.days, appointments),
         },
+      }).catch((err) => {
+        return dispatch({
+          type: null,
+        });
       });
     });
   };
