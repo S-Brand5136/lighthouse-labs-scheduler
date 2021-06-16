@@ -10,7 +10,6 @@ import {
   getByAltText,
   getByPlaceholderText,
   queryByText,
-  prettyDOM,
 } from '@testing-library/react';
 
 import axios from 'axios';
@@ -141,9 +140,9 @@ describe('Application', () => {
     expect(getByText(appointment, 'SAVING')).toBeInTheDocument();
 
     // Check that Error mode is shown on failed put request
-    await waitForElement(() => queryByText(appointment, 'ERROR')).catch(() => {
-      expect(getByText(appointment, 'Error')).toBeInTheDocument();
-    });
+    await waitForElement(() => queryByText(appointment, 'Error'));
+
+    expect(getByText(appointment, 'Error')).toBeInTheDocument();
 
     fireEvent.click(getByAltText(appointment, 'Close'));
 
@@ -151,7 +150,43 @@ describe('Application', () => {
     expect(getByAltText(appointment, 'Add')).toBeInTheDocument();
   });
 
-  it('shows the delete error when failing to dele an existing appointment', () => {
+  it('shows the delete error when failing to dele an existing appointment', async () => {
     axios.delete.mockRejectedValueOnce();
+
+    // Render components and wait for data to be fetched and added
+    const { container } = render(<Application />);
+    await waitForElement(() => getByText(container, 'Archie Cohen'));
+
+    const appointment = getAllByTestId(container, 'appointment').find(
+      (appointment) => queryByText(appointment, 'Archie Cohen')
+    );
+
+    // Simulate canceling a new interview
+    fireEvent.click(getByAltText(appointment, 'Delete'));
+
+    // Check that the confirmation mode shows
+    expect(
+      getByText(appointment, 'Are you sure you would like to delete?')
+    ).toBeInTheDocument();
+    fireEvent.click(getByText(appointment, 'Confirm'));
+
+    // Check that the deleting status is shown
+    expect(getByText(appointment, 'DELETING')).toBeInTheDocument();
+
+    // Check that the error mode was shown
+    await waitForElement(() => queryByText(appointment, 'Error'));
+    expect(getByText(appointment, 'Error')).toBeInTheDocument();
+
+    // Close error mode
+    fireEvent.click(getByAltText(appointment, 'Close'));
+
+    // Check that application went back to original state
+    expect(getByText(appointment, 'Archie Cohen')).toBeInTheDocument();
+
+    const day = getAllByTestId(container, 'day').find((day) =>
+      queryByText(day, 'Monday')
+    );
+
+    expect(getByText(day, '1 spot remaining'));
   });
 });
