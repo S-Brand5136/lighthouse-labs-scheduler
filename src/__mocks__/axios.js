@@ -82,14 +82,14 @@ export default {
       });
     }
   }),
-  put: jest.fn((url) => {
+  put: jest.fn(() => {
     /* Reslove Adding an Appointment */
     return Promise.resolve({
       status: 204,
       statusText: 'No Content',
     });
   }),
-  delete: jest.fn((url) => {
+  delete: jest.fn(() => {
     /* Resloves deleting an Appointment */
     return Promise.resolve({
       status: 200,
