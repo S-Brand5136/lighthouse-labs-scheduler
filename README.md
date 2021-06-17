@@ -2,6 +2,8 @@
 
 Interview Scheduler is a _fullstack_ web app that is designed to allow students to book interviews with designated interviewers. The front-end is built with **Create-react-app**, and the back-end is powered by **Express**. It was built during week 7/8 of my time at [Lighthouse Labs](https://www.lighthouselabs.ca/).
 
+### App Demo
+
 A Demo of this app can be found here -> [lighthouse-scheduler demo](https://60ca81220bd5d909c1c8fdc6--dazzling-varahamihira-88e10e.netlify.app/), its hosted using a combination of heroku and netlify. If the appointment data does not show straight away, heroku is just taking a hot minute to spin up the server for us!
 
 ### Table of Contents
