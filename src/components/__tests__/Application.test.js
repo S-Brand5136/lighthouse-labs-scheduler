@@ -80,11 +80,9 @@ describe('Application', () => {
 
     // Check that the interview was canceled
     await waitForElement(() => getByAltText(appointment, 'Add'));
-
     const day = getAllByTestId(container, 'day').find((day) =>
       queryByText(day, 'Monday')
     );
-
     expect(getByText(day, '2 spots remaining'));
   });
 
@@ -112,11 +110,9 @@ describe('Application', () => {
 
     // Check that the spots remaining is unchanged
     await waitForElement(() => queryByText(appointment, 'Lydia Miller-Jones'));
-
     const day = getAllByTestId(container, 'day').find((day) =>
       queryByText(day, 'Monday')
     );
-
     expect(getByText(day, '1 spot remaining')).toBeInTheDocument();
   });
 
@@ -141,9 +137,7 @@ describe('Application', () => {
 
     // Check that Error mode is shown on failed put request
     await waitForElement(() => queryByText(appointment, 'Error'));
-
     expect(getByText(appointment, 'Error')).toBeInTheDocument();
-
     fireEvent.click(getByAltText(appointment, 'Close'));
 
     // Check that mode defaulted back to EMPTY
@@ -170,10 +164,8 @@ describe('Application', () => {
     ).toBeInTheDocument();
     fireEvent.click(getByText(appointment, 'Confirm'));
 
-    // Check that the deleting status is shown
+    // Check that the deleting status is shown and check for Error mode
     expect(getByText(appointment, 'DELETING')).toBeInTheDocument();
-
-    // Check that the error mode was shown
     await waitForElement(() => queryByText(appointment, 'Error'));
     expect(getByText(appointment, 'Error')).toBeInTheDocument();
 
@@ -182,7 +174,6 @@ describe('Application', () => {
 
     // Check that application went back to original state
     expect(getByText(appointment, 'Archie Cohen')).toBeInTheDocument();
-
     const day = getAllByTestId(container, 'day').find((day) =>
       queryByText(day, 'Monday')
     );

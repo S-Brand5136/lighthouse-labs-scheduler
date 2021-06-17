@@ -8,16 +8,19 @@ const Form = (props) => {
   const [name, setName] = useState(props.name || '');
   const [error, setError] = useState('');
 
+  // Resets the name and interview state
   const reset = () => {
     setInterviewer(null);
     setName('');
   };
 
+  // Cancel onClick handler, closes edit mode
   const cancel = () => {
     reset();
     props.onCancel();
   };
 
+  // Validates user name, saves a new interview
   const validate = () => {
     if (name === '') {
       return setError('Student name cannot be blank');
