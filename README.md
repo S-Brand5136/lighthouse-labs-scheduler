@@ -31,7 +31,11 @@ A Demo of this app can be found here -> [lighthouse-scheduler demo](https://60ca
 
 #### Main page
 
+![Main Page](https://github.com/S-Brand5136/lighthouse-labs-scheduler/blob/master/docs/scheduler-main.png)
+
 #### Editting an Appointment
+
+!["Edit Appointment"](https://github.com/S-Brand5136/lighthouse-labs-scheduler/blob/master/docs/scheduler-edit.png)
 
 ## Setup <a name='setUp'></a>
 
