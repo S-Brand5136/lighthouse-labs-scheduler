@@ -63,15 +63,24 @@ const useApplicationData = () => {
       [id]: appointment,
     };
 
-    return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
-      return dispatch({
-        type: SET_INTERVIEW,
-        value: {
-          appointments,
-          days: spotsRemaining(state.day, state.days, appointments),
-        },
+    return axios
+      .put(`/api/appointments/${id}`, { interview })
+      .then((data) => {
+        if (data.status === 200) {
+          return dispatch({
+            type: SET_INTERVIEW,
+            value: {
+              appointments,
+              days: spotsRemaining(state.day, state.days, appointments),
+            },
+          });
+        }
+
+        throw Error;
+      })
+      .then((err) => {
+        return err;
       });
-    });
   };
 
   // Sets interview to null, and updates appointments in state Object

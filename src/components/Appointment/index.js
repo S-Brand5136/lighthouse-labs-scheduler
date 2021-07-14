@@ -30,16 +30,21 @@ const Appointment = (props) => {
   // Sends a new interview to be saved up to the parent,
   //transitions to saving while waiting for response
   const save = (name, interviewer) => {
+    transition(SAVING, true);
+
     const interview = {
       student: name,
       interviewer,
     };
 
-    transition(SAVING, true);
     props
       .bookInterview(props.id, interview)
-      .then(() => transition(SHOW))
-      .catch(() => transition(ERROR_SAVE, true));
+      .then(() => {
+        transition(SHOW);
+      })
+      .catch(() => {
+        return transition(ERROR_SAVE, true);
+      });
   };
 
   // Sends an ID for an appointment to be deleted,
